@@ -13,7 +13,7 @@ function computerPlay(choices) {
 function playerPlay() {
     /* we will prompt the user for a choice, 
     then make sure Rock or roCk becomes rock by applying .lowercase() */
-    playerSelection = prompt("Rock, Paper or Scissors?",'')
+//    playerSelection = prompt("Rock, Paper or Scissors?",'')
     playerSelection = playerSelection.toLowerCase()
     return playerSelection;
 }
@@ -49,5 +49,31 @@ function game() {
     return `You won ${playerScore} rounds, computer won ${computerScore}`;
 }
 
+const buttons = document.querySelectorAll('button');
 
-console.log(playRound(playerPlay(),computerPlay(outputs)))
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        return(button.id);
+    });
+});
+
+//play a round with player choice = rock if player presses rock
+const button1 = document.querySelector('#button1');
+button1.addEventListener('click', () => {
+    playRound("rock",computerPlay(outputs))
+})
+
+//play a round with player choice = paper if player presses paper
+const button2 = document.querySelector('#button2');
+button2.addEventListener('click', () => {
+    playRound("paper",computerPlay(outputs))
+})
+
+//play a round with player choice = scissors if player presses scissors
+const button3 = document.querySelector('#button3');
+button3.addEventListener('click', () => {
+    playRound("scissors",computerPlay(outputs))
+})
+
+//console.log(playRound(playerPlay(),computerPlay(outputs)))
