@@ -3,6 +3,7 @@ let computerSelection
 let playerScore = 0
 let computerScore = 0
 let playerSelection
+let playResult
 
 function computerPlay(choices) {
     //we apply a random method to the outputs array in order to randomize the computer's choice
@@ -27,17 +28,20 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection == 'paper' && computerSelection == 'rock')) {
     //we then add one point to the player's score
     playerScore++;
-    return `You win! ${playerSelection} beats ${computerSelection}.`; 
+    //we change the content of the result div
+    result.textContent = `You win! ${playerSelection} beats ${computerSelection}.`; 
     //computer wins if
     } else if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
     (playerSelection == 'scissors' && computerSelection == 'paper') ||
     (playerSelection == 'paper' && computerSelection == 'rock')) {
     //we then add one point to the computer's score
     computerScore++;
-    return `You loose! ${computerSelection} beats ${playerSelection}.`; 
+    //we change the content of the result div
+    result.textContent = `You loose! ${computerSelection} beats ${playerSelection}.`; 
     //otherwise it's a tie
     } else {
-        return "It's a tie!"
+        //we change the content of the result div
+        result.textContent = "It's a tie!"
     }
 }   
 
@@ -75,5 +79,15 @@ const button3 = document.querySelector('#button3');
 button3.addEventListener('click', () => {
     playRound("scissors",computerPlay(outputs))
 })
+
+//Display the result of the play
+//define the parent div
+const container = document.querySelector('#container');
+const p = document.createElement('p')
+//create a result div
+const result = document.createElement('result');
+//add the result dic to the container
+container.appendChild(p)
+p.appendChild(result);
 
 //console.log(playRound(playerPlay(),computerPlay(outputs)))
