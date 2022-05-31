@@ -4,6 +4,7 @@ let playerScore = 0
 let computerScore = 0
 let playerSelection
 let playResult
+let winner
 
 function computerPlay(choices) {
     //we apply a random method to the outputs array in order to randomize the computer's choice
@@ -11,50 +12,47 @@ function computerPlay(choices) {
     return computerSelection
 }
 
-function playerPlay() {
-    /* we will prompt the user for a choice, 
-    then make sure Rock or roCk becomes rock by applying .lowercase() */
-//    playerSelection = prompt("Rock, Paper or Scissors?",'')
-    playerSelection = playerSelection.toLowerCase()
-    return playerSelection;
-}
-
 function playRound(playerSelection, computerSelection) {
     //Print the players choices
-    console.log(`You chose ${playerSelection}, computer chose ${computerSelection}`)
-    //player wins if
-    if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
-    (playerSelection == 'scissors' && computerSelection == 'paper') ||
-    (playerSelection == 'paper' && computerSelection == 'rock')) {
-    //we then add one point to the player's score
-    playerScore++;
-    //we change the content of the result div
-    result.textContent = `You win! ${playerSelection} beats ${computerSelection}.`; 
-    //computer wins if
-    } else if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
-    (playerSelection == 'scissors' && computerSelection == 'paper') ||
-    (playerSelection == 'paper' && computerSelection == 'rock')) {
-    //we then add one point to the computer's score
-    computerScore++;
-    //we change the content of the result div
-    result.textContent = `You loose! ${computerSelection} beats ${playerSelection}.`; 
-    //otherwise it's a tie
-    } else {
+        playersChoices.textContent =`You chose ${playerSelection}, computer chose ${computerSelection}. `
+        
+        //player wins if
+        if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
+        (playerSelection == 'scissors' && computerSelection == 'paper') ||
+        (playerSelection == 'paper' && computerSelection == 'rock')) {
+        //we then add one point to the player's score
+            playerScore++;
         //we change the content of the result div
-        result.textContent = "It's a tie!"
-    }
+            result.textContent = `You win, ${playerSelection} beats ${computerSelection}.`; 
+        
+            //computer wins if
+        } else if ((computerSelection == 'rock' && playerSelection == 'scissors') ||
+        (computerSelection == 'scissors' && playerSelection == 'paper') ||
+        (computerSelection == 'paper' && playerSelection == 'rock')) {
+        //we then add one point to the computer's score
+            computerScore++;
+        //we change the content of the result div
+            result.textContent = `You loose, ${computerSelection} beats ${playerSelection}.`; 
+        
+            //otherwise it's a tie
+        } else {
+            //we change the content of the result div
+            result.textContent = "It's a tie!"
+        }
+        //Display the current score
+        runningScore.textContent = `Player: ${playerScore}, Computer: ${computerScore}`
+        
+        
+        //Begin a new loop to check if we have a winner
+        if (computerScore == 5) {
+            result.textContent = `Computer wins!`
+        } else if (playerScore == 5) {
+            result.textContent = "Player wins!"
+        } 
 }   
 
-function game() {
-    // we want to play five rounds
-    for (let i = 0; i < 5; i++) {
-        playRound(playerPlay(), computerPlay(outputs))};
-    // we display the final score
-    return `You won ${playerScore} rounds, computer won ${computerScore}`;
-}
-
+//Add some events for the buttons
 const buttons = document.querySelectorAll('button');
-
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -84,10 +82,15 @@ button3.addEventListener('click', () => {
 //define the parent div
 const container = document.querySelector('#container');
 const p = document.createElement('p')
+//display each player choice for every round
+const playersChoices = document.createElement('playersChoices')
+//display the running score
+const runningScore = document.createElement('runningScore')
 //create a result div
 const result = document.createElement('result');
 //add the result dic to the container
-container.appendChild(p)
-p.appendChild(result);
 
-//console.log(playRound(playerPlay(),computerPlay(outputs)))
+container.appendChild(p)
+container.appendChild(runningScore)
+p.appendChild(playersChoices)
+p.appendChild(result);
