@@ -50,4 +50,4 @@ function game() {
 }
 
 
-console.log(game())
+console.log(playRound(playerPlay(),computerPlay(outputs)))
