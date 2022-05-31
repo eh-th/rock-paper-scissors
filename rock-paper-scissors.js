@@ -32,7 +32,7 @@ function playRound(playerSelection, computerSelection) {
         //we then add one point to the computer's score
             computerScore++;
         //we change the content of the result div
-            result.textContent = `You loose, ${computerSelection} beats ${playerSelection}.`; 
+            result.textContent = `You lose, ${computerSelection} beats ${playerSelection}.`; 
         
             //otherwise it's a tie
         } else {
@@ -40,7 +40,7 @@ function playRound(playerSelection, computerSelection) {
             result.textContent = "It's a tie!"
         }
         //Display the current score
-        runningScore.textContent = `Player: ${playerScore}, Computer: ${computerScore}`
+        runningScore.textContent = `Player: ${playerScore}, computer: ${computerScore}`
         
         
         //Begin a new loop to check if we have a winner
